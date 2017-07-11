@@ -1,5 +1,5 @@
 group 'org.example'
-version '1.1-SNAPSHOT'
+version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
 apply plugin: 'idea'
@@ -8,26 +8,15 @@ apply plugin: 'ebean'
 sourceCompatibility = 1.8
 
 buildscript {
-    ext.postgresql_driver_version = "9.4.1207.jre7"
-
     repositories {
-        mavenLocal()
-        //mavenCentral()
+        mavenCentral()
     }
     dependencies {
-        classpath "io.ebean:ebean-gradle-plugin:10.2.1"
-    }
-}
-
-idea {
-    module {
-        sourceDirs += file("$projectDir/generated/java")
-        generatedSourceDirs += file("$projectDir/generated/java")
+        classpath "io.ebean:ebean-gradle-plugin:10.2.3"
     }
 }
 
 repositories {
-    mavenLocal()
     mavenCentral()
 }
 
@@ -36,57 +25,27 @@ configurations {
 }
 
 ebean {
-    queryBeans =  true
-    debugLevel = 1 //1 - 9
-    //packages = ['org.example']
+    debugLevel = 2
+    queryBeans = true
+}
+
+idea {
+    module {
+        sourceDirs += file("$projectDir/generated")
+        generatedSourceDirs += file("$projectDir/generated")
+    }
 }
 
 dependencies {
+    compile 'io.ebean:ebean:10.4.1'
+    compile 'io.ebean:ebean-querybean:10.3.1'
+    compile 'ch.qos.logback:logback-classic:1.2.3'
 
-//    apt 'io.ebean:querybean-generator:10.2.1'
-//    apt 'io.ebean:ebean:10.3.1'
-//    apt 'io.ebean:persistence-api:2.2.1'
-
-    // have this for Idea
-    compile 'io.ebean:querybean-generator:10.2.1'
-
-    compile "org.postgresql:postgresql:$postgresql_driver_version"
-    compile "io.ebean:ebean:10.3.1"
-    compile "io.ebean:ebean-querybean:10.3.1"
-
-    testCompile "org.avaje.composite:composite-testing:3.1"
+    testCompile 'org.avaje.composite:composite-testing:3.1'
 }
-
-//compileJava {
-//    //options.annotationProcessorPath = configurations.apt
-//    options.compilerArgs << "-s"
-//    options.compilerArgs << "$projectDir/generated/java"
-//    doFirst {
-//        // make sure that directory exists
-//        file(new File(projectDir, '/generated/java')).mkdirs()
-//    }
-//}
-
-clean.doLast {
-    // clean-up directory when necessary
-    file(new File(projectDir, "/generated")).deleteDir()
-    file(new File(projectDir, "/generated_tests")).deleteDir()
-}
-
-//sourceSets {
-//    generated {
-//        java {
-//            srcDir "$projectDir/generated/java"
-//            compileClasspath += sourceSets.main.runtimeClasspath
-//            //builtBy 'foo'
-//        }
-//    }
-//}
-
 
 test {
     useTestNG()
     testLogging.showStandardStreams = true
     testLogging.exceptionFormat = 'full'
 }
-

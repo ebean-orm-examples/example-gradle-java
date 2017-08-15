@@ -1,5 +1,6 @@
 out/
 build/
 generated/
+.gradle/
 .idea/
 *.iml

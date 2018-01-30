@@ -31,6 +31,7 @@ ebean {
 dependencies {
     compile 'io.ebean:ebean:11.9.1'
     compile 'ch.qos.logback:logback-classic:1.2.3'
+    compile 'mysql:mysql-connector-java:6.0.6'
 
     testCompile 'org.avaje.composite:composite-testing:3.1'
 }

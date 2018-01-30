@@ -2,17 +2,20 @@ group 'org.example'
 version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
-apply plugin: 'idea'
-apply plugin: 'ebean'
+apply plugin: 'io.ebean'
 
-sourceCompatibility = 1.8
+compileJava   {
+    sourceCompatibility = '1.8'
+    targetCompatibility = '1.8'
+}
 
 buildscript {
     repositories {
+        //mavenLocal()
         mavenCentral()
     }
     dependencies {
-        classpath "io.ebean:ebean-gradle-plugin:10.2.3"
+        classpath "io.ebean:ebean-gradle-plugin:11.5.3"
     }
 }
 
@@ -20,25 +23,13 @@ repositories {
     mavenCentral()
 }
 
-configurations {
-    apt
-}
-
 ebean {
-    debugLevel = 2
-    queryBeans = true
+    debugLevel = 1
 }
 
-idea {
-    module {
-        sourceDirs += file("$projectDir/generated")
-        generatedSourceDirs += file("$projectDir/generated")
-    }
-}
 
 dependencies {
-    compile 'io.ebean:ebean:10.4.1'
-    compile 'io.ebean:ebean-querybean:10.3.1'
+    compile 'io.ebean:ebean:11.9.1'
     compile 'ch.qos.logback:logback-classic:1.2.3'
 
     testCompile 'org.avaje.composite:composite-testing:3.1'

@@ -27,8 +27,10 @@ public class CustomerTest {
     assertNotNull(customer.getId());
 
     Optional<Customer> found = Customer.find
+        .query()
         .where()
-        .id.eq(customer.getId())
+        .eq("id", customer.getId())
+        //.id.eq(customer.getId())
         .findOneOrEmpty();
 
 //    Optional<Customer> found = Ebean.find(Customer.class)
@@ -56,10 +58,12 @@ public class CustomerTest {
       });
 
 
-    List<Customer> hells = new CustomerFinder().where()
-      .name.istartsWith("hell")
-      //.foo.startsWith("oh")
-      .id.greaterThan(1)
+    List<Customer> hells = new CustomerFinder()
+        .query()
+        .where()
+//      .name.istartsWith("hell")
+//      //.foo.startsWith("oh")
+//      .id.greaterThan(1)
       .findList();
 
     System.out.println("hells:"+hells);

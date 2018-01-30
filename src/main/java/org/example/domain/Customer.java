@@ -1,21 +1,15 @@
 package org.example.domain;
 
-import io.ebean.Model;
 import io.ebean.annotation.NotNull;
 
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.Lob;
-import javax.persistence.Version;
 import java.time.LocalDate;
 
 @Entity
-public class Customer extends Model {
+public class Customer extends BaseDomain {
 
   public static CustomerFinder find = new CustomerFinder();
-
-  @Id
-  Long id;
 
   @NotNull
   String name;
@@ -27,19 +21,8 @@ public class Customer extends Model {
   @Lob
   String comments;
 
-  @Version
-  Long version;
-
   public Customer(String name) {
     this.name = name;
-  }
-
-  public Long getId() {
-    return id;
-  }
-
-  public void setId(Long id) {
-    this.id = id;
   }
 
   public String getName() {
@@ -66,11 +49,4 @@ public class Customer extends Model {
     this.comments = comments;
   }
 
-  public Long getVersion() {
-    return version;
-  }
-
-  public void setVersion(Long version) {
-    this.version = version;
-  }
 }

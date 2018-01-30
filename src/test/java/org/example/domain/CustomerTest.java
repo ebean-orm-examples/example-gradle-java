@@ -1,6 +1,5 @@
 package org.example.domain;
 
-import io.ebean.Ebean;
 import org.testng.annotations.Test;
 
 import java.time.LocalDate;
@@ -14,59 +13,42 @@ import static org.testng.Assert.assertTrue;
 
 public class CustomerTest {
 
-  @Test
-  public void saveAndFind() {
+	@Test
+	public void saveAndFind() {
 
-    Customer customer = new Customer("Hello Rob");
-    customer.setStartDate(LocalDate.now());
-    customer.setComments("What is this good for?");
+		Customer customer = new Customer("Hello Rob");
+		customer.setStartDate(LocalDate.now());
+		customer.setComments("What is this good for?");
 
-    customer.save();
-    //Ebean.save(customer);
+		customer.save();
 
-    assertNotNull(customer.getId());
+		assertNotNull(customer.getId());
 
-    Optional<Customer> found = Customer.find
-        .query()
-        .where()
-        .eq("id", customer.getId())
-        //.id.eq(customer.getId())
-        .findOneOrEmpty();
+		Optional<Customer> found = Customer.find.byIdOptional(customer.getId());
 
-//    Optional<Customer> found = Ebean.find(Customer.class)
-//      .where()
-//      .idEq(customer.getId())
-//      .findOneOrEmpty();
+		assertTrue(found.isPresent());
+		found.ifPresent(it -> {
+					assertEquals(it.getId(), customer.getId());
+					assertEquals(it.getName(), customer.getName());
+				}
+		);
 
-    assertTrue(found.isPresent());
-    found.ifPresent(it -> {
-        assertEquals(it.getId(), customer.getId());
-        assertEquals(it.getName(), customer.getName());
-      }
-    );
-
-//    Customer.find
-//      .where()
-//      .id.isNotNull()
-//      .findEach();
-
-    Ebean.find(Customer.class)
-      .where().isNotNull("id")
-      .findEach(it -> {
-        System.out.println("hello " + it.getName());
-        System.out.println(".. started on: " + it.getStartDate());
-      });
+		Customer.find.query()
+				.where().isNotNull("id")
+				.findEach(it -> {
+					System.out.println("hello " + it.getName());
+					System.out.println(".. started on: " + it.getStartDate());
+				});
 
 
-    List<Customer> hells = new CustomerFinder()
-        .query()
-        .where()
-//      .name.istartsWith("hell")
-//      //.foo.startsWith("oh")
-//      .id.greaterThan(1)
-      .findList();
+		List<Customer> bats = Customer.find
+				.query()
+				.where()
+				.startsWith("name", "BatOutOfHell")
+				.gt("id", 1)
+				.findList();
 
-    System.out.println("hells:"+hells);
-  }
+		System.out.println("bats:" + bats);
+	}
 
 }

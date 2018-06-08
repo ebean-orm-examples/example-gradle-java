@@ -5,8 +5,8 @@ apply plugin: 'java'
 apply plugin: 'io.ebean'
 
 compileJava   {
-    sourceCompatibility = '1.8'
-    targetCompatibility = '1.8'
+    sourceCompatibility = JavaVersion.VERSION_1_10
+    targetCompatibility = JavaVersion.VERSION_1_10
 }
 
 buildscript {
@@ -15,7 +15,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath "io.ebean:ebean-gradle-plugin:11.5.3"
+        classpath "io.ebean:ebean-gradle-plugin:11.10.1"
     }
 }
 
@@ -29,7 +29,7 @@ ebean {
 
 
 dependencies {
-    compile 'io.ebean:ebean:11.9.1'
+    compile 'io.ebean:ebean:11.17.1'
     compile 'ch.qos.logback:logback-classic:1.2.3'
     compile 'mysql:mysql-connector-java:6.0.6'
 

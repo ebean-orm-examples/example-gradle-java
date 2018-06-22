@@ -1,14 +1,15 @@
 package org.example.domain;
 
-import org.testng.annotations.Test;
+
+import org.junit.Test;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotNull;
-import static org.testng.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 
 public class CustomerTest {

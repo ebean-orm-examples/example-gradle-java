@@ -15,7 +15,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath "io.ebean:ebean-gradle-plugin:11.5.3"
+        classpath "io.ebean:ebean-gradle-plugin:11.11.1"
     }
 }
 
@@ -29,15 +29,14 @@ ebean {
 
 
 dependencies {
-    compile 'io.ebean:ebean:11.9.1'
+    compile 'io.ebean:ebean:11.17.5'
     compile 'ch.qos.logback:logback-classic:1.2.3'
     compile 'mysql:mysql-connector-java:6.0.6'
 
-    testCompile 'org.avaje.composite:composite-testing:3.1'
+    testCompile 'org.avaje.composite:junit:1.1'
 }
 
 test {
-    useTestNG()
     testLogging.showStandardStreams = true
     testLogging.exceptionFormat = 'full'
 }

@@ -1,12 +1,7 @@
-
-buildscript {
-    repositories {
-        mavenLocal()
-        mavenCentral()
-    }
-    dependencies {
-        classpath "io.ebean:ebean-gradle-plugin:11.37.1"
-    }
+plugins {
+    id("idea")
+    id("java")
+    id("io.ebean") version "11.40.1"
 }
 
 repositories {
@@ -14,45 +9,33 @@ repositories {
     mavenCentral()
 }
 
-//plugins {
-//    id("io.ebean") version "11.37.1"
-//}
-
-apply plugin: 'java'
-apply plugin: 'io.ebean'
-apply plugin: 'idea'
-
-//compileJava   {
-//    sourceCompatibility = '1.8'
-//    targetCompatibility = '1.8'
-//}
+compileJava {
+    sourceCompatibility = '1.8'
+    targetCompatibility = '1.8'
+}
 
 idea {
     module {
-        sourceDirs += file("$projectDir/generated")
-        generatedSourceDirs += file("$projectDir/generated")
+        sourceDirs += file("$projectDir/build/classes/java/main")
+        generatedSourceDirs += file("$projectDir/build/classes/java/main")
     }
 }
 
 dependencies {
-    annotationProcessor("io.ebean:ebean-annotation:4.7")
-    annotationProcessor("io.ebean:persistence-api:2.2.1")
-    annotationProcessor("io.ebean:ebean-querybean:11.37.1")
-    annotationProcessor("io.ebean:querybean-generator:11.37.1")
 
-    implementation("io.ebean:ebean-annotation:4.7")
-    implementation("io.ebean:ebean-querybean:11.37.1")
-    implementation("io.ebean:ebean:11.37.1")
+    annotationProcessor("io.ebean:querybean-generator:11.39.3")
 
     implementation("org.avaje.composite:logback:1.1")
 
-    testImplementation("io.ebean.test:ebean-test-config:11.37.1")
-    testCompile 'org.avaje.composite:junit:1.1'
+    implementation("io.ebean:ebean:11.39.1")
+    implementation("io.ebean:ebean-querybean:11.39.1")
 
+    testImplementation("io.ebean.test:ebean-test-config:11.39.1")
+    testImplementation('org.avaje.composite:junit:1.1')
 }
 
 ebean {
-    debugLevel       = 1 //1 - 9
+    debugLevel = 0 //0 - 9
 }
 
 test {

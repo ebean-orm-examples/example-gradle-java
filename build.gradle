@@ -1,7 +1,7 @@
 plugins {
     id("idea")
     id("java")
-    id("io.ebean") version "11.40.1"
+    id("io.ebean") version "12.6.5"
 }
 
 repositories {
@@ -10,27 +10,27 @@ repositories {
 }
 
 compileJava {
-    sourceCompatibility = '1.8'
-    targetCompatibility = '1.8'
+    sourceCompatibility = '11'
+    targetCompatibility = '11'
 }
 
-idea {
-    module {
-        sourceDirs += file("$projectDir/build/classes/java/main")
-        generatedSourceDirs += file("$projectDir/build/classes/java/main")
-    }
-}
+//idea {
+//    module {
+//        sourceDirs += file("$projectDir/build/classes/java/main")
+//        generatedSourceDirs += file("$projectDir/build/classes/java/main")
+//    }
+//}
 
 dependencies {
 
-    annotationProcessor("io.ebean:querybean-generator:11.39.3")
+    annotationProcessor("io.ebean:querybean-generator:12.6.5")
 
     implementation("org.avaje.composite:logback:1.1")
 
-    implementation("io.ebean:ebean:11.39.1")
-    implementation("io.ebean:ebean-querybean:11.39.1")
+    implementation("io.ebean:ebean:12.6.5")
+    implementation("io.ebean:ebean-querybean:12.6.5")
 
-    testImplementation("io.ebean.test:ebean-test-config:11.39.1")
+    testImplementation("io.ebean:ebean-test:12.6.5")
     testImplementation('org.avaje.composite:junit:1.1')
 }
 

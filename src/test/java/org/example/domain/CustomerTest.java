@@ -23,9 +23,6 @@ public class CustomerTest {
     Customer customer = new Customer("Bar");
     customer.save();
 
-    URL resource = getClass().getResource("/ebean.mf");
-    assertNotNull(resource);
-
     Customer found = new QCustomer()
       .name.istartsWith("ba")
       .findOne();
